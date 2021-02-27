@@ -7,16 +7,31 @@ public class DestroyObject : MonoBehaviour
     [SerializeField]
     private GameObject effectPrefab;
 
+    [SerializeField]
+    private GameObject effectPrefab2;
+    public int objectHP;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Shell"))
         {
-            Destroy(this.gameObject);
-            Destroy(other.gameObject);
+            objectHP -= 1;
 
-            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+            if (objectHP > 0)
+            {
+                Destroy(other.gameObject);
+                GameObject effect = Instantiate(effectPrefab, other.transform.position, Quaternion.identity);
+                Destroy(effect, 2.0f);
+            }
+            else
+            {
+                Destroy(other.gameObject);
 
-            Destroy(effect, 2.0f);
+                GameObject effect2 = Instantiate(effectPrefab2, other.transform.position, Quaternion.identity);
+                Destroy(effect2, 2.0f);
+
+                Destroy(this.gameObject);
+            }
         }
     }
 }
