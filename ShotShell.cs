@@ -7,15 +7,22 @@ public class ShotShell : MonoBehaviour
     public float shotSpeed;
 
     [SerializeField]
-    private GameObject shellPrefab;
+    private GameObject shellPrefab = null;
 
     [SerializeField]
-    private AudioClip shotSound;
+    private AudioClip shotSound = null;
+
+    private float timeBetweenShot = 0.75f;
+    private float timer;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        timer += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot)
         {
+            timer = 0.0f;
+
             GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity);
 
             Rigidbody shellRb = shell.GetComponent<Rigidbody>();
