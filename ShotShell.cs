@@ -15,12 +15,16 @@ public class ShotShell : MonoBehaviour
     private float timeBetweenShot = 0.75f;
     private float timer;
 
+    public int shotCount;
+
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot)
+        if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot && shotCount > 0)
         {
+            shotCount -= 1;
+
             timer = 0.0f;
 
             GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity);
