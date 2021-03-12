@@ -14,8 +14,12 @@ public class TankHealth : MonoBehaviour
     [SerializeField]
     private Text HPLabel;
 
+    public int tankMaxHP = 5;
+
     void Start()
     {
+        tankHP = tankMaxHP;
+
         HPLabel.text = "HP：" + tankHP;
     }
 
@@ -42,5 +46,17 @@ public class TankHealth : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void AddHP(int amount)
+    {
+        tankHP += amount;
+
+        if (tankHP > tankMaxHP)
+        {
+            tankHP = tankMaxHP;
+        }
+
+        HPLabel.text = "HP：" + tankHP;
     }
 }
