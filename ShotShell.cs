@@ -21,8 +21,12 @@ public class ShotShell : MonoBehaviour
     [SerializeField]
     private Text shellLabel;
 
+    public int shotMaxCount = 20;
+
     void Start()
     {
+        shotCount = shotMaxCount;
+
         shellLabel.text = "砲弾：" + shotCount;
     }
 
@@ -48,5 +52,17 @@ public class ShotShell : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(shotSound, transform.position);
         }
+    }
+
+    public void AddShell(int amount)
+    {
+        shotCount += amount;
+
+        if (shotCount > shotMaxCount)
+        {
+            shotCount = shotMaxCount;
+        }
+
+        shellLabel.text = "砲弾：" + shotCount;
     }
 }
