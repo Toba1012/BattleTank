@@ -11,6 +11,9 @@ public class DestroyObject : MonoBehaviour
     private GameObject effectPrefab2;
     public int objectHP;
 
+    [SerializeField]
+    private GameObject itemPrefab;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Shell"))
@@ -31,6 +34,9 @@ public class DestroyObject : MonoBehaviour
                 Destroy(effect2, 2.0f);
 
                 Destroy(this.gameObject);
+
+                Vector3 pos = transform.position;
+                Instantiate(itemPrefab, new Vector3(pos.x, pos.y + 0.6f, pos.z), Quaternion.identity);
             }
         }
     }
