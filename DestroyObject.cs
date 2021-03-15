@@ -12,7 +12,7 @@ public class DestroyObject : MonoBehaviour
     public int objectHP;
 
     [SerializeField]
-    private GameObject itemPrefab;
+    private GameObject[] itemPrefabs;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,8 +35,14 @@ public class DestroyObject : MonoBehaviour
 
                 Destroy(this.gameObject);
 
+                int itemNumber = Random.Range(0, itemPrefabs.Length);
+
                 Vector3 pos = transform.position;
-                Instantiate(itemPrefab, new Vector3(pos.x, pos.y + 0.6f, pos.z), Quaternion.identity);
+
+                if(itemPrefabs.Length != 0)
+                {
+                    Instantiate(itemPrefabs[itemNumber], new Vector3(pos.x, pos.y + 0.6f, pos.z), Quaternion.identity);
+                }
             }
         }
     }
