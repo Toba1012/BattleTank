@@ -12,6 +12,8 @@ public class Aim : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, transform.forward);
 
+        Debug.DrawRay(transform.position, transform.forward * 60, Color.green);
+
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 60))
