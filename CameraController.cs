@@ -16,6 +16,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private AudioListener FPSListener;
 
+    [SerializeField]
+    private GameObject aimImage;
+
     void Start()
     {
         mainCamera.enabled = true;
@@ -23,6 +26,8 @@ public class CameraController : MonoBehaviour
 
         mainListener.enabled = true;
         FPSListener.enabled = false;
+
+        aimImage.SetActive(false);
     }
 
     void Update()
@@ -36,6 +41,8 @@ public class CameraController : MonoBehaviour
 
             mainListener.enabled = false;
             FPSListener.enabled = true;
+
+            aimImage.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.C) && mainCameraON == false)
         {
@@ -46,6 +53,8 @@ public class CameraController : MonoBehaviour
 
             mainListener.enabled = true;
             FPSListener.enabled = false;
+
+            aimImage.SetActive(false);
         }
     }
 }
