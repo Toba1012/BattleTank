@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TankHealth : MonoBehaviour
 {
@@ -43,9 +44,18 @@ public class TankHealth : MonoBehaviour
                 GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
                 Destroy(effect2, 1.0f);
 
-                Destroy(gameObject);
+                //Destroy(gameObject);
+
+                this.gameObject.SetActive(false);
+
+                Invoke("GoToGameOver", 1.5f);
             }
         }
+    }
+
+    void GoToGameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     public void AddHP(int amount)
